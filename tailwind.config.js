@@ -1,0 +1,18 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/*.{html,js}'],
+  theme: {
+    extend: {
+      backgroundImage: {
+        'hero-pattern': "url('./assets/images/sIM90.svg')",
+
+      },
+      colors: {
+        main: "rgb(233, 51, 40)",
+        main100: "rgba(233, 51, 40,0.5)"
+      }
+
+    },
+  },
+  plugins: [],
+}
