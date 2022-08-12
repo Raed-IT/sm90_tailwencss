@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
+
+         x-transition:enter="transition ease-in-out duration-1000 transform"
+                            x-transition:enter-start="-translate-x-5 opacity-0"
+                            x-transition:enter-end="translate-x-0 opacity-100"
+                     
+ -->
 
 <head>
     <meta charset="UTF-8">
@@ -8,22 +15,84 @@
     <!-- font awesome cdn  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+
+    <script defer>
+        function menu() {
+
+            return {
+                openMenu: false,
+                itemsMenu: [
+                    { title: "Home", url: "#" },
+                    { title: "About Us ", url: "#" },
+                    { title: "Services  ", url: "#" },
+                ]
+            }
+        }
+        function selections() {
+            return {
+                toggleServers: false,
+                servers: [
+                    { name: "server 1" },
+                    { name: "server 2" },
+                    { name: "server 3" },
+                    { name: "server 4" },
+                    { name: "server 5" },
+                    { name: "server 6" },
+                    { name: "server 7" },
+
+                ],
+                toggleCountries: false,
+                countries: [
+                    { name: "syr", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+                    { name: "idelb", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+                    { name: "sarmada", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+                    { name: "harem", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+                    { name: "country 5", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+                    { name: "country 6", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+                    { name: "country 7", image: '../assets/images/photo_2022-08-09_16-51-28.jpg' },
+
+                ],
+            }
+        }
+        function slider() {
+            return {
+                activeSlide: 0,
+                slides: [
+                    { image: '../assets/images/download.jfif', id: 1 },
+                    { image: '../assets/images/download(1).jfif', id: 2 },
+                    { image: '../assets/images/download(2).jfif', id: 3 },
+
+                ],
+                loop() {
+                    setInterval(
+                        () => {
+                            this.activeSlide = this.activeSlide === this.slides.length - 1 ? 0 : this.activeSlide + 1;
+                        }, 5000
+                    );
+                },
+            }
+        }
+        function table() {
+            return {
+                items: [
+                    { id: 1, quantity: 100, price: 2.6, image: '../assets/images/sIM90.svg', },
+                    { id: 2, quantity: 10, price: 2.6, image: '../assets/images/sIM90.svg', },
+                    { id: 3, quantity: 1050, price: 2.6, image: '../assets/images/sIM90.svg', },
+                    { id: 4, quantity: 400, price: 2.6, image: '../assets/images/sIM90.svg', },
+                    { id: 5, quantity: 10570, price: 2.6, image: '../assets/images/sIM90.svg', },
+                    { id: 6, quantity: 75, price: 2.6, image: '../assets/images/sIM90.svg', },
+                    { id: 7, quantity: 468, price: 2.6, image: '../assets/images/sIM90.svg', },
+                ]
+            }
+        }
+    </script>
     <link rel="stylesheet" href="../css/main.css">
     <title>Sim90 </title>
-    <style>
-        .custom-shape {
-            z-index: 0px;
-            position: absolute;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-        }
-    </style>
+
 </head>
 
-<body class="bg-[#ebebeb]  " x-data="{ openMenu : false }" :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
-    <header class="flex justify-between items-center  shadow  drop-shadow-sm py-4  px-8  ">
+<body class="bg-[#ebebeb] relative   " x-data="menu()" :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
+    <header class="flex justify-between items-center  shadow  drop-shadow-sm py-4  h-[70px] px-8  ">
         <!-- Logo -->
         <a href="/">
             <img class="h-8" src="../assets/images/sIM90.svg" alt="">
@@ -37,43 +106,34 @@
         <!-- Main Navigations -->
         <nav class="hidden md:flex">
 
+
             <ul class="flex flex-row gap-2">
-                <li>
-                    <a href="#" class="inline-flex py-2 px-3 bg-main100 rounded" aria-current="true">Home</a>
-                </li>
-                <li>
-                    <a href="#" class="inline-flex py-2 px-3 hover:bg-main100 rounded">About</a>
-                </li>
-                <li>
-                    <a href="#" class="inline-flex py-2 px-3 hover:bg-main100  rounded">Services</a>
-                </li>
-                <li>
-                    <a href="#" class="inline-flex py-2 px-3 hover:bg-main100  rounded">contact us</a>
-                </li>
+                <template x-for="menu in itemsMenu">
+                    <li>
+                        <a :href="menu.url" class="inline-flex py-2 px-3 hover:bg-main100 rounded" aria-current="true"
+                            x-text="menu.title"></a>
+                    </li>
+                </template>
+
             </ul>
 
         </nav>
 
     </header>
-    <nav class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-1000   "
+    <nav class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-[1000]   "
         :class="openMenu ? 'visible' : 'invisible' " x-cloak>
 
         <!-- UL Links -->
-        <ul class="absolute top-0 right-0 bottom-0 w-10/12 py-4 bg-white z-20 drop-shadow-2xl z-10 transition-all"
+        <ul class="absolute top-0 right-0 bottom-0 w-10/12 py-4 bg-white  z-[200] drop-shadow-2xl  transition-all"
             :class="openMenu ? 'translate-x-0' : 'translate-x-full'">
 
-            <li class="border-b border-inherit">
-                <a href="#" class="block p-4" aria-current="true">Home</a>
-            </li>
-            <li class="border-b border-inherit">
-                <a href="#" class="block p-4">About</a>
-            </li>
-            <li class="border-b border-inherit">
-                <a href="#" class="block p-4">Articles</a>
-            </li>
-            <li class="border-b border-inherit">
-                <a href="#" class="block p-4">Contact</a>
-            </li>
+            <template x-for="menu in itemsMenu">
+                <li class="border-b border-inherit">
+                    <a :href="menu.url" class="block p-4" aria-current="true" x-text="menu.title">Home</a>
+                </li>
+            </template>
+
+
 
         </ul>
 
@@ -87,10 +147,145 @@
         </button>
 
     </nav>
-    <main>
-        <div class="custom-shape">
-            <img src="../assets/images/BG-1.svg" alt="">
-        </div>
+
+
+
+
+    <main class=" mx-0 xl:mx-72 md:mx-20   ">
+        <section x-data="selections()" class="m-auto">
+            <!-- build server section   -->
+            <div class="m-5 relative" @click.outside="toggleServers=false">
+                <button @click="toggleServers=!toggleServers"
+                    class="bg-white  flex px-5  justify-between items-center h-10 w-full  "
+                    :class="toggleServers?'rounded-t-2xl shadow':'rounded-2xl'"> <i
+                        class="fa-solid fa-angle-down duration-500"
+                        :class="toggleServers?'rotate-180':''"></i><span>اختر
+                        السيرفر
+                    </span></button>
+                <!-- Dropdown menu -->
+                <div :class="toggleServers?'visible':'hidden'"
+                    class="absolute z-10 w-full rounded-b-2xl mr-5 bg-white shadow-2xl pb-3">
+                    <ul class="py-1 text-sm text-[#868686]">
+                        <div class="pt-[1px] mt-3 bg-[#ebebeb] w-full"></div>
+                        <template x-for="server in servers">
+                            <li class="hover:bg-[#9c7b88]">
+                                <a href="#"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    x-text="server.name">Dashboard</a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="m-5 relative" @click.outside="toggleCountries=false">
+                <button @click=" toggleCountries=!toggleCountries"
+                    class="bg-white  flex px-5  justify-between items-center h-10 w-full  "
+                    :class="toggleCountries?'rounded-t-2xl shadow':'rounded-2xl'"> <i
+                        class="fa-solid fa-angle-down duration-500"
+                        :class="toggleCountries?'rotate-180':''"></i><span>اختر
+                        الدوله
+                    </span></button>
+                <!-- Dropdown menu -->
+                <div :class=" toggleCountries?'visible':'hidden'"
+                    class="absolute z-10 w-full rounded-b-2xl bg-white shadow-2xl flex flex-wrap pb-2">
+                    <template x-for=" country in  countries">
+                        <div
+                            class="flex px-[5px] rounded-sm border-[1px] gap-2 border-solid   border-[#e6e5e4] m-1 justify-between items-center">
+                            <img :src="country.image" class="w-5 h-4">
+                            <span x-text="country.name"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+        <!-- build slider images  -->
+        <section x-data="slider()" x-init=" loop()">
+            <div class=" w-full p-3  md:p-5  flex flex-col justify-center items-center">
+                <div class=" w-full  h-[40vh] relative ">
+                    <!-- <div class=" w-full  h-[40vh] relative" x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] ,}"> -->
+                    <!-- Slides -->
+                    <template x-for="(slide ,index) in slides" :key="slide.id">
+                        <div x-show="index ==activeSlide" class="felx  justify-center  h-full items-center  "
+                            x-transition:enter="transition ease-in-out duration-500  "
+                            x-transition:enter-start="-translate-x-5 " x-transition:enter-end="translate-x-0 ">
+                            <img class="w-full h-full" :src="slide.image">
+
+                        </div>
+                    </template>
+
+                    <!-- Prev/Next Arrows -->
+                    <div class="absolute inset-0 flex">
+                        <div class="flex items-center justify-start w-full ">
+                            <button
+                                class=" text-white hover:text-main  hover:border-white  transition-all duration-700 rounded-full w-12 h-12  border-main border-2"
+                                x-on:click="activeSlide = activeSlide === 0 ? slides.length-1 : activeSlide - 1">
+                                <i class="fa-solid fa-chevron-left fa-2xl   "></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-end w-1/2">
+                            <button
+                                class=" text-white hover:text-main  hover:border-white  transition-all duration-700 rounded-full w-12 h-12  border-main border-2"
+                                x-on:click="activeSlide = activeSlide === slides.length-1 ? 0 : activeSlide + 1">
+                                <i class="fa-solid fa-angle-right fa-2xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </section>
+        <!--  end  build slider images  -->
+        <!-- build table  -->
+        <section class="table w-full  " x-data="table()">
+            <div class="overflow-x-auto relative m-2      rounded-t-2xl">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs text-white uppercase bg-main  text-center">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                صوره
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                السعر
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                العدد المتاح
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                شراء
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <template x-for="(item,index)   in items" :key="item.id">
+                            <tr class="   border-solid border-2 bordwe-[#ebebeb] bg-white">
+                                <span x-data="item"></span>
+                                <th scope="row"
+                                    class="py-4 px-6 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                                    <img src="../assets/images/sIM90.svg" class="w-[50px] h-[50px] rounded-full   "
+                                        alt="">
+                                </th>
+                                <td class="py-4 px-6">
+                                    <span x-text="item.price"></span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span x-text="item.quantity"></span>
+                                </td>
+                                <td class="py-4 px-6  bg-main">
+                                    <a href="#" class="font-medium text-white hover:underline">شراء</a>
+                                </td>
+                            </tr>
+
+                        </template>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- end  build table  -->
+
+
+
     </main>
 
 </body>
