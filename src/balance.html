@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome cdn  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+
+    <script>
+        function menu() {
+
+            return {
+                openMenu: false,
+                itemsMenu: [
+                    { title: "Home", url: "#" },
+                    { title: "About Us ", url: "#" },
+                    { title: "Services  ", url: "#" },
+                ]
+            }
+        }
+        function table2() {
+            return {
+                items: [
+                    { id: 1, price: 2.6, image: '../assets/images/sIM90.svg', number: 52, code: 5, date: 'date ' },
+                    { id: 2, price: 2.6, image: '../assets/images/sIM90.svg', number: 52, code: 5, date: 'date ' },
+                    { id: 3, price: 2.6, image: '../assets/images/sIM90.svg', number: 52, code: 5, date: 'date ' },
+                    { id: 4, price: 2.6, image: '../assets/images/sIM90.svg', number: 525, code: 6, date: 'date ' },
+                    { id: 5, price: 2.6, image: '../assets/images/sIM90.svg', number: 52, code: 5, date: 'date ' },
+                    { id: 6, price: 2.6, image: '../assets/images/sIM90.svg', number: 52, code: 5, date: 'date ' },
+                    { id: 7, price: 2.6, image: '../assets/images/sIM90.svg', number: 52, code: 5, date: 'date ' },
+                ]
+            }
+        }
+        function table() {
+            return {
+                items: [
+                    { id: 1, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                    { id: 2, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                    { id: 3, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                    { id: 4, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                    { id: 5, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                    { id: 6, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                    { id: 7, image: '../assets/images/sIM90.svg', creditor: 525, statement: 95952, balance: 895, date: "date" },
+                ]
+            }
+        }
+        function balanceData() {
+            return {
+
+
+                balanceData: {
+                    purchase: 50,
+                    shipping: 200,
+                    rem: 500,
+                },
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Sim90 </title>
+
+</head>
+
+<body x-data="menu()" dir="rtl" class="bg-[#ebebeb] relative   ">
+    <header class="flex justify-between items-center  shadow  drop-shadow-sm py-4  h-[70px] px-8  ">
+        <!-- Logo -->
+        <a href="/">
+            <img class="h-8" src="../assets/images/sIM90.svg" alt="">
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="flex md:hidden flex-col items-center align-middle" @click="openMenu = !openMenu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Main Navigations -->
+        <nav class="hidden md:flex">
+
+
+            <ul class="flex flex-row gap-2">
+                <template x-for="menu in itemsMenu">
+                    <li>
+                        <a :href="menu.url" class="inline-flex py-2 px-3 hover:bg-main100 rounded" aria-current="true"
+                            x-text="menu.title"></a>
+                    </li>
+                </template>
+
+            </ul>
+
+        </nav>
+
+    </header>
+    <nav class="fixed top-0 right-0 bottom-0 left-0 backdrop-blur-sm z-[1000]   "
+        :class="openMenu ? 'visible' : 'invisible' " x-cloak>
+
+        <!-- UL Links -->
+        <ul class="absolute top-0 right-0 bottom-0 w-10/12 py-4 bg-white  z-[200] drop-shadow-2xl  transition-all"
+            :class="openMenu ? 'translate-x-0' : 'translate-x-full'">
+
+            <template x-for="menu in itemsMenu">
+                <li class="border-b border-inherit hover:bg-main100">
+                    <a :href="menu.url" class="block p-4" aria-current="true" x-text="menu.title">Home</a>
+                </li>
+            </template>
+
+
+
+        </ul>
+
+        <!-- Close Button -->
+        <button class="absolute top-0 right-0 bottom-0 left-0" @click="openMenu = !openMenu" :aria-expanded="openMenu"
+            aria-label="Close Navigation Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-2 left-2" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+    </nav>
+    <main class=" mx-4 xl:mx-72 md:mx-20 ">
+        <!-- build balance  -->
+        <section x-data="balanceData()">
+            <div class="flex justify-between md:h-20 my-16    ">
+                <div class="w-[32%] md:w-[28%]  h-full border-solid border-2 border-main  rounded-lg    ">
+                    <div class="bg-main w-full h-6 text-xs flex items-center  rounded-b-lg justify-center  text-white">
+                        الرصيد المتبقي
+                    </div>
+                    <strong class="flex justify-center items-center w-full h-[60%] "
+                        x-text="balanceData.rem+'$'"></strong>
+                </div>
+                <div class="w-[32%] md:w-[28%]  h-full border-solid border-2 border-main  rounded-lg  ">
+                    <div class="bg-main w-full h-6 text-xs flex items-center  rounded-b-lg justify-center  text-white">
+                        الرصيد المتبقي
+                    </div>
+                    <strong class="flex justify-center items-center w-full h-[60%] "
+                        x-text="balanceData.shipping+'$'"></strong>
+                </div>
+                <div class="w-[32%] md:w-[28%]  h-full border-solid border-2 border-main  rounded-lg  ">
+                    <div class="bg-main w-full h-6 text-xs flex items-center  rounded-b-lg justify-center  text-white">
+                        الرصيد المتبقي
+                    </div>
+                    <strong class="flex justify-center items-center w-full h-[60%] "
+                        x-text="balanceData.purchase+'$'"></strong>
+                </div>
+            </div>
+        </section>
+        <!-- build table  -->
+        <section x-data="table()">
+            <div>
+                <div class="overflow-auto  rounded-2xl">
+                    <table class="w-full text-center ">
+
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4"> المدين</th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    الدائن
+                                </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    البيان
+                                </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    الرصيد الحالي
+                                </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    التاريخ
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="item in items " :key="item.id">
+                                <tr class="bg-white border-solid border-2 border-[#ebebeb] ">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <img :src="item.image" class="w-20 h-20 bg-cover  " alt="">
+                                    </td>
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap "
+                                        x-text="item.creditor">
+                                    </td>
+                                    <td class=" px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                        x-text="item.statement">
+
+                                    </td>
+
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                        x-text="item.balance">
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                        x-text="item.date">
+
+                                    </td>
+                                </tr>
+
+
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex w-full justify-center items-center gap-2 m-0 ">
+                    <i class="fa-solid fa-angles-right text-main"></i>
+                    5
+                    <i class="fa-solid fa-angles-left text-main"></i>
+                </div>
+            </div>
+        </section>
+        <!-- build table2  -->
+        <section x-data="table2()">
+            <div>
+                <div class="overflow-auto">
+                    <table class="w-full text-center ">
+                        <div class="mb-2 flex w-full h-[40px]  ">
+                            <input placeholder="ابحث  .... "
+                                class="w-[100%]   md:w-[40%]  lg:w-[30%]  rounded-t-xl   outline-none p-2   "
+                                type="text" name="search" id="">
+                        </div>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    نوع المنتج </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    الرقم
+                                </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    الكود
+                                </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    السعر
+                                </th>
+                                <th scope="col" class="text-sm bg-main text-white   px-6 py-4">
+                                    التاريخ
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="item in items " :key="item.id">
+                                <tr class="bg-white border-solid border-2 border-[#ebebeb] ">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <img :src="item.image" class="w-20 h-20 bg-cover  " alt="">
+                                    </td>
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap ">
+                                        <span x-text="item.number" class="pl-2"></span>
+                                        <i class="fa-solid fa-copy text-[#855c6c]"></i>
+                                    </td>
+                                    <td class=" px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        <span x-text="item.code" class="pl-2"></span>
+                                        <i class="fa-solid fa-copy text-[#855c6c]"></i>
+                                    </td>
+
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                        x-text="item.price">
+                                    </td>
+                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                                        x-text="item.date">
+
+                                    </td>
+                                </tr>
+
+
+                            </template>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex w-full justify-center items-center gap-2 m-0 ">
+                    <i class="fa-solid fa-angles-right text-main"></i>
+                    5
+                    <i class="fa-solid fa-angles-left text-main"></i>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
