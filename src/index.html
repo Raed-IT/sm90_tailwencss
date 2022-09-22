@@ -8,7 +8,9 @@
     <!-- font awesome cdn  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <!-- swiper cdn  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <script defer>
         function menu() {
 
@@ -111,8 +113,6 @@
         </button>
         <!-- Main Navigations -->
         <nav class="hidden md:flex">
-
-
             <ul class="flex flex-row gap-2">
                 <template x-for="menu in itemsMenu">
                     <li>
@@ -210,42 +210,22 @@
 
 
         <!-- build slider images  section -->
-        <section x-data="slider()" x-init=" loop()">
-            <div class=" w-full   md:p-5  flex flex-col justify-center items-center">
-                <div class=" w-full  h-[40vh] relative ">
-                    <!-- <div class=" w-full  h-[40vh] relative" "> -->
-                    <!-- Slides -->
-                    <template x-for="(slide ,index) in slides" :key="slide.id">
-                        <div x-show="index ==activeSlide" class="felx  justify-center  h-full items-center  "
-                            x-transition:enter="transition ease-in-out duration-500  "
-                            x-transition:enter-start="-translate-x-5 " x-transition:enter-end="translate-x-0 ">
-                            <img class="w-full h-full" :src="slide.image">
-
-                        </div>
-                    </template>
-
-                    <!-- Prev/Next Arrows -->
-                    <div class="absolute inset-0 flex">
-                        <div class="flex items-center justify-start w-full ">
-                            <button
-                                class=" text-white hover:text-main  hover:border-white  transition-all duration-500 rounded-full w-8 h-8 md:w-12  md:h-12 border-main border-2"
-                                x-on:click="activeSlide = activeSlide === 0 ? slides.length-1 : activeSlide - 1">
-                                <i class="fa-solid fa-chevron-left  "></i>
-                            </button>
-                        </div>
-                        <div class="flex items-center justify-end w-1/2">
-                            <button
-                                class=" text-white hover:text-main  hover:border-white  transition-all duration-700 rounded-full w-8 h-8 md:w-12  md:h-12  border-main border-2"
-                                x-on:click="activeSlide = activeSlide === slides.length-1 ? 0 : activeSlide + 1">
-                                <i class="fa-solid fa-angle-right  "></i>
-                            </button>
-                        </div>
-                    </div>
+        <section>
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <img src="../assets/images/download.jfif" alt="" class="swiper-slide  bg-cover h-full w-full">
+                    <img src="../assets/images/download(1).jfif" alt="" class="swiper-slide bg-cover h-full w-full">
+                    <img src="../assets/images/download(2).jfif" alt="" class="swiper-slide bg-cover h-full w-full">
                 </div>
-
-            </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
         </section>
+        F
         <!-- build table  -->
         <section class="table w-full  " x-data="table()">
             <div class="overflow-x-auto relative m-4      rounded-t-2xl">
@@ -294,7 +274,6 @@
             </div>
         </section>
         <!-- end  build table  -->
-
 
         <!-- build table  -->
         <section x-data="table2()">
@@ -385,7 +364,32 @@
         </section>
 
     </main>
+    <!-- swiper js  -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
 
+            loop: true,
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            lazy: true,
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+
+        });
+    </script>
 </body>
 
 </html>
